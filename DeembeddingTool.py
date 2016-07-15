@@ -17,12 +17,16 @@ class DeembedWiz(DeembedGUI.DeembedWiz):
         DeembedGUI.DeembedWiz.__init__(self,parent)
         
     def deembedChoiceChange(self,event):
-        deembedChoice = self.m_deembedChoice.GetSelection()
+        deembedchoice = self.m_deembedChoice.GetSelection()
+        print deembedchoice
+
+    def GetDeembedChoice(self):
+        return deembedchoice
         
     def tempChoiceChange(self,event):
-        tempChoice = self.m_tempChoice.GetSelection()
+        tempchoice = self.m_tempChoice.GetSelection()
         
-        if tempChoice:
+        if tempchoice:
             self.m_DeembedFilePicker2.Disable()
             self.m_DeembedFilePicker3.Disable()
             self.m_DeembedFilePicker2.SetPath('')
@@ -31,26 +35,49 @@ class DeembedWiz(DeembedGUI.DeembedWiz):
         else:
             self.m_DeembedFilePicker2.Enable()
             self.m_DeembedFilePicker3.Enable()
-    
+
+        print tempchoice
+
+    def GetTempChoice(self):
+        return tempchoice
+
     def Close(self,event):
         event.Skip()
 
     def RawDirChange(self, event):
-        RawDir = self.m_RawDirPicker.GetPath()
-        for root, dirs, files in os.walk(RawDir):
-            print root
+        rawdir = self.m_RawDirPicker.GetPath()
+        print rawdir
+
+    def GetRawDir(self):
+        return rawdir
 
     def DeembedDirChange(self, event):
-        DeembedDir = self.m_DeembedDirPicker.GetPath()
+        deembeddir = self.m_DeembedDirPicker.GetPath()
+        print deembeddir
+
+    def GetDeembedDir(self):
+        return deembeddir
 
     def DeembedFile1Change(self, event):
-        DeembedFilename1 = self.m_DeembedFilePicker1.GetPath()
+        deembedfilename1 = self.m_DeembedFilePicker1.GetPath()
+        print deembedfilename1
+
+    def GetDeembedFilename1(self):
+        return deembedfilename1
 
     def DeembedFile2Change(self, event):
-        DeembedFilename2 = self.m_DeembedFilePicker2.GetPath()
+        deembedfilename2 = self.m_DeembedFilePicker2.GetPath()
+        print deembedfilename2
+
+    def GetDeembedFilename2(self):
+        return deembedfilename2
 
     def DeembedFile3Change(self, event):
-        DeembedFilename3 = self.m_DeembedFilePicker3.GetPath()
+        deembedfilename3 = self.m_DeembedFilePicker3.GetPath()
+        print deembedfilename3
+
+    def GetDeembedFilename3(self):
+        return deembedfilename3
         
         
 #mandatory in wx, create an app, False stands for not deteriction stdin/stdout
@@ -64,7 +91,18 @@ mywiz = DeembedWiz(None)
 mywiz.FitToPage(mywiz.m_pages[1])
 mywiz.RunWizard(mywiz.m_pages[0])
 
+rawdir = mywiz.GetRawDir()
+deembeddir = mywiz.GetDeembedDir()
+deembedchoice = mywiz.GetDeembedChoice()
+tempchoice = mywiz.GetTempChoice()
+deembedfilename1 = mywiz.GetDeembedFilename1()
+deembedfilename2 = mywiz.GetDeembedFilename2()
+deembedfilename3 = mywiz.GetDeembedFilename3()
 
+for dirpath, dirnames, filenames in os.walk (rawdir):
+        os.mkdir (os.path.join (deembeddir, dirpath[1+len (rawdir):]))
+
+os.startfile (deembeddir)
 
 mywiz.Destroy()
 
@@ -73,29 +111,5 @@ app.MainLoop()
 
 
 
-#
-#touchstone_file1 = os.path.join('C:\\Users\\jslaton\\Desktop\\PythonDeembedProject','DIE73.s3p')
-#touchstone_file2 = os.path.join('C:\\Users\\jslaton\\Desktop\\PythonDeembedProject','OPEN.s3p')
-#
-#OPEN = rf.Network(touchstone_file2)
-#DIE73 = rf.Network(touchstone_file1)
-#
-#DIE73Path1 = rf.Network(frequency = DIE73.f, s=DIE73.s[:,:2,:2])
-#OPENPath1 = rf.Network(frequency = OPEN.f, s=OPEN.s[:,:2,:2])
-#
-#denom_s21 = np.sqrt(OPENPath1.s[:,0,0]) * np.sqrt(OPENPath1.s[:,1,1])
-#numer_s21 = DIE73Path1.s[:,0,1] - OPENPath1.s[:,0,1]
-#s21 = np.divide(numer_s21,denom_s21)
-#s11 = np.divide(DIE73.s[:,0,0],OPEN.s[:,0,0])
-#s_deembedded = np.array([[s11, s21],[s21,s11]])
-##s_deembedded = s_deembedded.
-#
-#deembedded = rf.Network(f=DIE73.f, s = s_deembedded)
-#
-#rf.stylely()
-#fig = plt.figure()
-#DIE73.s21.plot_s_db()
-##OPEN.s21.plot_s_db()
-##deembedded.s21.plot_s_db()
-##DIE73Path1.plot_s_db()
-##deembedded.plot_s_db()
+
+
