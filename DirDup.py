@@ -1,9 +1,9 @@
+# This module takes in dir1 and dir2 and creates the folder structure located in dir1 in dir2
 import os
 
-source_dir = "C:\Users\Joey\Desktop\TestDir\Dir1"
-target_dir = "C:\Users\Joey\Desktop\TestDir\Dir2"
 
-for dirpath, dirnames, filenames in os.walk (source_dir):
-    os.mkdir (os.path.join (target_dir, dirpath[1+len (source_dir):]))
+def duplicate(dir1,dir2):
 
-os.startfile (target_dir)
+    if dir1 != dir2:
+        for dirpath, dirnames, filenames in os.walk(dir1):
+            os.mkdir(os.path.join(dir2, dirpath[1 + len(dir1):]))

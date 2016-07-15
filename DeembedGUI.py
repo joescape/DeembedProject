@@ -8,7 +8,7 @@
 ###########################################################################
 
 import wx
-#import wx.xrc
+import wx.xrc
 import wx.wizard
 
 ###########################################################################
@@ -18,7 +18,7 @@ import wx.wizard
 class DeembedWiz ( wx.wizard.Wizard ):
 	
 	def __init__( self, parent ):
-		wx.wizard.Wizard.__init__ ( self, parent, id = wx.ID_ANY, title = u"PSemi Deembedding Wizard", bitmap = wx.NullBitmap, pos = wx.DefaultPosition, style = wx.DEFAULT_DIALOG_STYLE )
+		wx.wizard.Wizard.__init__ ( self, parent, id = wx.ID_ANY, title = u"PSemi De-embedding Wizard", bitmap = wx.NullBitmap, pos = wx.DefaultPosition, style = wx.DEFAULT_DIALOG_STYLE )
 		
 		self.SetSizeHintsSz( wx.Size( -1,-1 ), wx.DefaultSize )
 		self.m_pages = []
@@ -28,7 +28,7 @@ class DeembedWiz ( wx.wizard.Wizard ):
 		
 		bSizer2 = wx.BoxSizer( wx.VERTICAL )
 		
-		m_deembedChoiceChoices = [ u"Scalar Deembedding with .sNp (All Open)", u"Scalar Deembedding with representative .s1p (Open)", u"Scalar Deembedding with representative .s2p (2x Thru)" ]
+		m_deembedChoiceChoices = [ u"Scalar De-embedding with .sNp (All Open)", u"Scalar De-embedding with representative .s1p (Open)", u"Scalar De-embedding with representative .s2p (2x Thru)" ]
 		self.m_deembedChoice = wx.RadioBox( self.m_wizPage1, wx.ID_ANY, u"Deembedding Format", wx.DefaultPosition, wx.DefaultSize, m_deembedChoiceChoices, 1, wx.RA_SPECIFY_COLS )
 		self.m_deembedChoice.SetSelection( 1 )
 		self.m_deembedChoice.SetToolTipString( u"Choose Scalar De-embedding with .sNp to de-embed files with a measurement of the PCB using all ports.\n \nChoose Scalar De-embedding with representative .s1p to use a single representative trace measurement to de-embed all ports.\n\nChoose Scalar De-embedding with representative .s2p to use a 2x thru to de-embed all ports." )
@@ -155,6 +155,7 @@ class DeembedWiz ( wx.wizard.Wizard ):
 		# Connect Events
 		self.Bind( wx.wizard.EVT_WIZARD_CANCEL, self.Close )
 		self.Bind( wx.wizard.EVT_WIZARD_FINISHED, self.Close )
+		self.Bind( wx.wizard.EVT_WIZARD_PAGE_CHANGING, self.OnPageChange )
 		self.m_deembedChoice.Bind( wx.EVT_RADIOBOX, self.deembedChoiceChange )
 		self.m_tempChoice.Bind( wx.EVT_RADIOBOX, self.tempChoiceChange )
 		self.m_RawDirPicker.Bind( wx.EVT_DIRPICKER_CHANGED, self.RawDirChange )
@@ -180,6 +181,9 @@ class DeembedWiz ( wx.wizard.Wizard ):
 	def Close( self, event ):
 		event.Skip()
 	
+	
+	def OnPageChange( self, event ):
+		event.Skip()
 	
 	def deembedChoiceChange( self, event ):
 		event.Skip()

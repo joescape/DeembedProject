@@ -46,7 +46,7 @@
             <property name="size">479,563</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE</property>
             <property name="subclass"></property>
-            <property name="title">PSemi Deembedding Wizard</property>
+            <property name="title">PSemi De-embedding Wizard</property>
             <property name="tooltip"></property>
             <property name="window_extra_style"></property>
             <property name="window_name"></property>
@@ -85,7 +85,7 @@
             <event name="OnWizardFinished">Close</event>
             <event name="OnWizardHelp"></event>
             <event name="OnWizardPageChanged"></event>
-            <event name="OnWizardPageChanging"></event>
+            <event name="OnWizardPageChanging">OnPageChange</event>
             <object class="WizardPageSimple" expanded="1">
                 <property name="bg"></property>
                 <property name="bitmap"></property>
@@ -153,7 +153,7 @@
                             <property name="caption"></property>
                             <property name="caption_visible">1</property>
                             <property name="center_pane">0</property>
-                            <property name="choices">&quot;Scalar Deembedding with .sNp (All Open)&quot; &quot;Scalar Deembedding with representative .s1p (Open)&quot; &quot;Scalar Deembedding with representative .s2p (2x Thru)&quot;</property>
+                            <property name="choices">&quot;Scalar De-embedding with .sNp (All Open)&quot; &quot;Scalar De-embedding with representative .s1p (Open)&quot; &quot;Scalar De-embedding with representative .s2p (2x Thru)&quot;</property>
                             <property name="close_button">1</property>
                             <property name="context_help"></property>
                             <property name="context_menu">1</property>
