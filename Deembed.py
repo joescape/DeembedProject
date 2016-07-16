@@ -28,9 +28,9 @@ s_deembedded = np.array([[s11, s21],[s21,s11]])
 
 deembedded = rf.Network(f=DIE73.f, s = s_deembedded)
 
-rf.stylely()
-fig = plt.figure()
-DIE73.s21.plot_s_db()
+#rf.stylely()
+#fig = plt.figure()
+#DIE73.s21.plot_s_db()
 #OPEN.s21.plot_s_db()
 #deembedded.s21.plot_s_db()
 #DIE73Path1.plot_s_db()
